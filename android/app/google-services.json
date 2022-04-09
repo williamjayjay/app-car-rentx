@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "897220512167",
+    "project_id": "wedev-c25ba",
+    "storage_bucket": "wedev-c25ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897220512167:android:31f663a866456d17b7ce82",
+        "android_client_info": {
+          "package_name": "com.rentx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897220512167-vhq1biqqu478ove7r4augh0277hfgv91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rentx",
+            "certificate_hash": "6b757a44cc5ce01c0cfa26a563da7d8aeb3bda2e"
+          }
+        },
+        {
+          "client_id": "897220512167-0fo95ev40j51360hi8hrdr1jm65n6hq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9eJbU1WDztOUGDTFZ7jLsUnoth3XQxWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897220512167-0fo95ev40j51360hi8hrdr1jm65n6hq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

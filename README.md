@@ -19,7 +19,7 @@ The rentx app made from the mobile module rocketseat classes.
 
 # Mobile
 <h1 align="center">
-  <img alt="Demonstration-Server" style="margin: 2px" title="Demonstration" src="gif/gif1.gif" width="300px" height="400 />
+  <img alt="Demonstration-Server" style="margin: 2px" title="Demonstration" src="gif/gif1.gif" width="300px"  />
 </h1>
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 /* ============ NATIVES E LIBS ============ */
 
 import {
@@ -6,9 +6,8 @@ import {
   ImageIndexes,
   ImageIndex,
   CarImageWrapper,
-  CarImage
-
-} from './styles';
+  CarImage,
+} from "./styles";
 /* ============ COMPONENTS E OTHERS CREATED ============ */
 
 interface Props {
@@ -26,11 +25,8 @@ export function ImageSlider({ imagesUrl }: Props) {
       </ImageIndexes>
 
       <CarImageWrapper>
-        <CarImage
-          source={{ uri: imagesUrl[0] }}
-          resizeMode="contain"
-        />
+        <CarImage source={{ uri: imagesUrl }} resizeMode="contain" />
       </CarImageWrapper>
     </Container>
-  )
+  );
 }

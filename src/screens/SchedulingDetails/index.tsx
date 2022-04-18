@@ -5,6 +5,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { parseISO, format } from "date-fns";
+
 /* ============ NATIVES E LIBS ============ */
 
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
@@ -40,6 +41,7 @@ import {
 import { Button } from "../../components/Button";
 import { CarDTO } from "../../dtos/CarDTO";
 import { api } from "../../services/api";
+
 /* ============ COMPONENTS E OTHERS CREATED ============ */
 
 interface Params {
@@ -92,6 +94,7 @@ export function SchedulingDetails() {
       });
 
     console.log("handleNavSchedulingComplete.log");
+    // navigation.navigate('SchedulingComplete')
   }
 
   function handleNavBack() {

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 /* ============ NATIVES E LIBS ============ */
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
+import { Feather } from "@expo/vector-icons";
 
 import {
   Container,
@@ -21,29 +22,62 @@ import {
   About,
   Accessories,
   Footer,
+  RentalPeriod,
+  CalendarIcon,
+  DateTitle,
+  DateInfo,
+  DateValue,
 } from "./styles";
 import { Button } from "../../components/Button";
-import { CarDTO } from "../../dtos/CarDTO";
+import { JobsDTO } from "../../dtos/JobsDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
+import { RFValue } from "react-native-responsive-fontsize";
+import { api } from "../../services/api";
 /* ============ COMPONENTS E OTHERS CREATED ============ */
 
 interface Params {
-  car: CarDTO;
+  dataJobs: JobsDTO;
 }
 
 export function CarDetails() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { car } = route.params as Params;
+  const [accessoriesJobs, setAccessoriesJobs] = useState([]);
 
-  function handleNavScheduling() {
-    navigation.navigate("Scheduling", { car });
-    console.log("handleNavScheduling.log");
+  const { dataJobs } = route.params as Params;
+
+  function handleNavAcceptService() {
+    navigation.navigate("AcceptService", {
+      dataJobs,
+      dataAccessories: accessoriesJobs,
+    });
+    console.log("handleNavAcceptService.log");
   }
 
   function handleNavBack() {
     navigation.goBack();
   }
+
+  async function fetchAccessoriesByIdJob() {
+    // setRefreshing(true);
+    try {
+      const response = await api.get(`/accessories/jobs/${dataJobs?.id}`);
+      setAccessoriesJobs(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error);
+      // setRefreshing(false);
+      // setLoading(false);
+    } finally {
+      // setLoading(false);
+      // setRefreshing(false);
+    }
+  }
+
+  useEffect(() => {
+    console.log("screen");
+    fetchAccessoriesByIdJob();
+  }, []);
 
   return (
     <Container>
@@ -57,40 +91,62 @@ export function CarDetails() {
       </Header>
 
       <CarImages>
-        <ImageSlider imagesUrl={car?.photos} />
+        <ImageSlider imagesUrl={dataJobs?.thumbnail} />
       </CarImages>
 
       <Content>
         <Details>
           <Description>
-            <Brand>{car?.brand}</Brand>
-            <Name>{car?.name}</Name>
+            {/* <Brand numberOfLines={8}>{dataJobs?.brand}</Brand> */}
+            <Brand numberOfLines={8}>{dataJobs?.typeJobs}</Brand>
+            <Name numberOfLines={8}>{dataJobs?.name}</Name>
           </Description>
 
           <Rent>
-            <Period>{car?.rent?.period}</Period>
-            <Price>R$ {car?.rent?.price}</Price>
+            {/* <Period numberOfLines={5}>{dataJobs?.rent?.period}</Period> */}
+            <Period numberOfLines={5}>
+              {dataJobs?.periodJobs}
+              {"\n"}você recebe{" "}
+            </Period>
+            <Price numberOfLines={5}>R$ {dataJobs?.priceJobs}</Price>
           </Rent>
         </Details>
 
-        <Accessories>
-          {car.accessories.map((accessory) => (
-            <Accessory
-              key={accessory?.type}
-              name={accessory?.name}
-              icon={getAccessoryIcon(accessory?.type)}
-            />
-          ))}
-        </Accessories>
+        {accessoriesJobs.length > 0 ? (
+          <Accessories>
+            {accessoriesJobs?.map((accessory) => (
+              <Accessory
+                key={accessory?.id}
+                name={accessory?.name}
+                icon={getAccessoryIcon(accessory?.type)}
+              />
+            ))}
+          </Accessories>
+        ) : (
+          <Brand style={{ marginVertical: 16 }}>
+            Sem registro de informações...
+          </Brand>
 
-        <About>{car.about}</About>
+          // <Accessories>
+          //   <Accessory key={1} name="2" icon={getAccessoryIcon("")} />
+
+          //   <Accessory key={2} name="2" icon={getAccessoryIcon("")} />
+
+          //   <Accessory key={3} name="2" icon={getAccessoryIcon("")} />
+
+          //   <Accessory key={4} name="2" icon={getAccessoryIcon("")} />
+
+          //   <Accessory key={5} name="2" icon={getAccessoryIcon("")} />
+
+          //   <Accessory key={6} name="2" icon={getAccessoryIcon("")} />
+          // </Accessories>
+        )}
+
+        <About>{dataJobs.aboutJobs}</About>
       </Content>
 
       <Footer>
-        <Button
-          onPress={handleNavScheduling}
-          title="Escolher período do aluguel."
-        />
+        <Button onPress={handleNavAcceptService} title="Seguinte" />
       </Footer>
     </Container>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons'
-import {  RectButtonProps } from 'react-native-gesture-handler';
+import { BorderlessButtonProps, RectButtonProps } from 'react-native-gesture-handler';
 /* ============ NATIVES E LIBS ============ */
 
 import { Container } from './styles';

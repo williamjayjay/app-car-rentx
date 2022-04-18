@@ -3,6 +3,8 @@ import { ActivityIndicator } from "react-native";
 import { useTheme } from "styled-components";
 /* ============ NATIVES E LIBS ============ */
 
+/* ============ COMPONENTS E OTHERS CREATED ============ */
+
 export function Load() {
   const theme = useTheme();
 
@@ -10,7 +12,9 @@ export function Load() {
     <ActivityIndicator
       color={theme.colors.main}
       size="large"
-      style={{ flex: 1 }}
+      style={{
+        flex: 1,
+      }}
     />
   );
 }

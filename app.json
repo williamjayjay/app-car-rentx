@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "rentx",
-    "slug": "rentx",
+    "name": "lifequalityone",
+    "slug": "lifequalityone",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.willrpg.lifequalityone"
+    }
   },
-  "name": "rentx"
+  "name": "lifequalityone"
 }

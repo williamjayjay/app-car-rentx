@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { RectButtonProps } from "react-native-gesture-handler";
-/* ============ NATIVES E LIBS ============ */
-
-import { CarDTO } from "../../dtos/CarDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useTheme } from "styled-components";
+import { Feather } from "@expo/vector-icons";
 
 import {
   Container,
@@ -16,32 +16,49 @@ import {
   Price,
   Type,
   CarImage,
+  SpaceWidth,
+  StatusValue,
+  TextStatus,
 } from "./styles";
-/* ============ COMPONENTS E OTHERS CREATED ============ */
+import { View } from "react-native";
+import { ConvertIcons } from "../ConvertIcons";
+import { JobsDTO } from "../../dtos/JobsDTO";
 
 interface Props extends RectButtonProps {
-  data: CarDTO;
+  data: JobsDTO;
 }
 
 export function Car({ data, ...rest }: Props) {
-  const MotorIcon = getAccessoryIcon(data?.fuel_type);
+  // const MotorIcon = getAccessoryIcon(data?.fuel_type);
+  const theme = useTheme();
 
   return (
-    <Container {...rest}>
+    <Container
+      disabled={data?.statusJobs == "ocupado" ? true : false}
+      text={data?.statusJobs}
+      {...rest}
+    >
       <Details>
-        <Brand>{data?.brand}</Brand>
-        <Name>{data?.name}</Name>
+        <Rent>
+          <Brand numberOfLines={1}>{data?.typeJobs}</Brand>
+          <Name numberOfLines={1}>{data?.name}</Name>
+        </Rent>
 
         <About>
           <Rent>
-            <Period>{data?.rent?.period}</Period>
-            <Price>{`R$ ${data?.rent?.price}`}</Price>
+            <Period>{data?.periodJobs}</Period>
+            <Price numberOfLines={1}>{`R$ ${data?.priceJobs} `}</Price>
           </Rent>
+          {/* <SpaceWidth /> */}
 
           <Type>
-            <MotorIcon />
+            <ConvertIcons type={data?.houseType} />
           </Type>
         </About>
+        <StatusValue>
+          <Feather name="target" size={18} color="black" />
+          <TextStatus text={data?.statusJobs}>{data?.statusJobs}</TextStatus>
+        </StatusValue>
       </Details>
 
       <CarImage resizeMode="contain" source={{ uri: data?.thumbnail }} />
